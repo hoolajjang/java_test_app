@@ -1,20 +1,23 @@
-package java_test_app.dao;
+package java_test_app.dao.Impl;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import java_test_app.dao.IShortUrlInfoDao;
+
 @Component
-@Scope("singleton")
 public class ShortUrlStorage implements IShortUrlInfoDao {
 	private static final int CHAR_LENGTH = 8; 
-	//private static final String CHAR_SET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 	private Map<String, String> originUrlKeyMap = new HashMap<String, String>();
 	private Map<String, String> shortUrlKeyMap = new HashMap<String, String>();
+	
+	public Map<String, String> getList() {
+		return shortUrlKeyMap;
+	}
 	
 	public String getShortUrl(String originUrl) {
 		if (originUrlKeyMap.containsKey(originUrl)) {

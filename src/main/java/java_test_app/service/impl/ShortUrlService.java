@@ -1,5 +1,7 @@
 package java_test_app.service.impl;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,11 @@ public class ShortUrlService implements IShortUrlService {
 	@Override
 	public String getShortUrl(String originUrl) {
 		return shortUrlData.getShortUrl(originUrl);
+	}
+
+	@Override
+	public Map<String, String> getList() {
+		return shortUrlData.getList();
 	}
 	
 }

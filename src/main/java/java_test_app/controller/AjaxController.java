@@ -1,5 +1,6 @@
 package java_test_app.controller;
 
+import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,9 +20,16 @@ public class AjaxController {
 	@RequestMapping(value="/getShortUrl", method=RequestMethod.GET)
 	public JsonResult GetShortUrl(@RequestParam("url") String url) {
 		
-		// URL validate check 처리
+		UrlValidator urlValidator = new UrlValidator();
+		if (urlValidator.isValid(url)) {
+			return JsonResult.success(shortUrlService.getShortUrl(url));
+		}
 		
-		
-		return JsonResult.success(shortUrlService.getShortUrl(url));
+		return JsonResult.fail();
+	}
+	
+	@RequestMapping(value="/getList", method=RequestMethod.GET)
+	public JsonResult GetList() {
+		return JsonResult.success(shortUrlService.getList());
 	}
 }

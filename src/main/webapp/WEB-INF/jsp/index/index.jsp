@@ -1,7 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" session="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 
 <html>
 <head>
@@ -13,7 +10,13 @@
 		URL : <input id="txtUrl" type="text" />
 		<button id="btnGenerate">변환</button>
 	</div>
+	
+	<p>Short URL</p>
 	<div id="divResult">
+	</div>
+	
+	<p>데이터 리스트</p>
+	<div id="divList">
 	</div>
 </body>
 
@@ -25,10 +28,13 @@
 		txtUrl = $("#txtUrl");
 		btnGenerate = $("#btnGenerate");
 		divResult = $("#divResult");
+		divList = $("#divList");
 		
 		btnGenerate.bind("click", function() {
 			getShortenUrl();
 		});
+		
+		reflashList();
 	});
 	
 	function getShortenUrl() {
@@ -41,7 +47,14 @@
 			type: "GET",
 			success: function(result) {
 				console.log(result);
-				renderResult(result.data);
+				
+				if (result.code < 0) {
+					alert("URL 형식이 잘못되었습니다.");
+				}
+				else {
+					renderResult(result.data);
+					reflashList();
+				}
 			}
 		});
 	}
@@ -54,6 +67,35 @@
 		.text(surl);
 		
 		divResult.empty().append(aLink);
+	}
+	
+	function reflashList() {
+		$.ajax({
+			url: "/ajax/getList",
+			processData: false,
+			contentType: false,
+			type: "GET",
+			success: function(result) {
+				console.log(result);
+				
+				if (result.code < 0) {
+					alert("오류입니다.");
+				}
+				else {
+					renderDataList(result.data);
+				}
+			}
+		});
+	}
+	
+	function renderDataList(data) {
+		var list = $("<ul />");
+		
+		for (var d in data) {
+			list.append("<li>" + d + " - " + data[d] + "</li>");
+		}
+		
+		divList.empty().append(list);
 	}
 })();
 </script>
