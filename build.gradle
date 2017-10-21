@@ -43,6 +43,6 @@ dependencies {
 
 jar {
 	manifest {
-		attributes 'Implementation-Title': "JavaTestApp", 'Implementation-Version': version
+		attributes 'Implementation-Title': "JavaTestApp", 'Implementation-Version': "1.0.0"
 	}
 }
