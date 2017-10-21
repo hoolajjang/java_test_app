@@ -1,0 +1,30 @@
+###########################################################
+#
+#   [LOCALHOST] application.yml 설정
+#
+#
+
+server:
+    port: 18181
+
+spring:
+    mvc:
+        view:
+            prefix: /WEB-INF/jsp/
+            suffix: .jsp
+            staticPathPattern: /**
+    resources:
+        staticLocations: file:./src/main/webapp/WEB-INF/static
+
+logging:
+    config: file:config/localhost/logback.xml
+
+datasource:
+    test:
+        driverClassName: "com.mysql.jdbc.Driver"
+        url: "jdbc:mysql://de-c-my-db.fttinc.kr:19336/test?autoReconnect=true&initialTimeout=3&maxReconnects=5&useUnicode=true&characterEncoding=utf8"
+        username: "dev433"
+        password: "433eoqkr)(!"
+        testOnBorrow: true
+        testWhileIdle: true
+        validationQuery: SELECT 1
