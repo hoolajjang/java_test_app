@@ -10,8 +10,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
-import java_test_app.controller.filter.UrlFilter;
-
 //@Configuration
 @ComponentScan(basePackages = {"java_test_app"})
 @EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class })
