@@ -6,15 +6,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
+	<p>변환하고자 하는 URL을 입력하세요.</p>
 	<div>
 		URL : <input id="txtUrl" type="text" />
 		<button id="btnGenerate">변환</button>
 	</div>
-	
-	<p>Short URL</p>
+	<hr />
+	<p>Short URL(클릭하면 새 창으로 띄워서 이동합니다.)</p>
 	<div id="divResult">
 	</div>
-	
+	<hr />
 	<p>데이터 리스트</p>
 	<div id="divList">
 	</div>
